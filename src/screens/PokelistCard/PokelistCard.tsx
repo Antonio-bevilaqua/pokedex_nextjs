@@ -8,6 +8,7 @@ import { PokemonContext } from '../../contexts/PokemonListContext';
 import { padLeft, idGenerator } from "../../../assets/utils/functions";
 import { backgrounds } from "./PokeType/typeUtils";
 import PokeType from './PokeType/PokeType';
+import "./pokelistCard.css";
 
 type Pokemon = {
     name: string,
@@ -26,7 +27,6 @@ const PokelistCard = ({ pokemon, index }: Props) => {
 
     const getPokeData = async () => {
         const result = await integrateData(pokemon);
-        console.log(result);
         setData(result);
     }
 
@@ -81,19 +81,17 @@ const PokelistCard = ({ pokemon, index }: Props) => {
     return (
         <div className="flex justify-center">
             <div className={`flex flex-col p-4 items-center max-w-sm shadow-md shadow-gray-400 dark:shadow-none rounded-lg transition-all ease-in-out
-                ${data === null ? "bg-gray-300 dark:bg-gray-900" : backgrounds["default"]}
+                ${data === null ? "bg-gray-300 dark:bg-gray-900 pokeCardAnimated" : backgrounds["default"]}
             `}
                 style={{
-                    opacity: `${data === null ? "0" : "1"}`,
-                    transform: `${data === null ? "translateY(100px)" : "translateY(0px)"}`,
-                    transitionDelay: `${getDelay()}ms`,
+                    animationDelay: `${getDelay()}ms`,
                 }}>
-                <h4 className='text-gray-700 dark:text-gray-400 text-2xl pb-4 w-full font-extrabold capitalize'>
-                    {renderData("name", "Buscando...")}
+                <h4 className='text-gray-700 dark:text-gray-400 text-2xl pb-4 w-full font-extrabold capitalize flex gap-2 items-center'>
+                    {data === null && <WarnSpinner />} {renderData("name", "Buscando...")}
                 </h4>
                 <div className="relative w-full rounded-lg bg-gray-500 dark:bg-gray-700 overflow-hidden max-w-sm">
                     <Image alt="" src={PokeballBackground} className="absolute top-0 left-0 opacity-20 w-2/3 z-0" />
-                    <img src={getSprite()} className="relative max-w-100 z-10" />
+                    <img src={getSprite()} className={`relative max-w-100 z-10 ${data === null ? "pokeballSpin" : "pokeShow"}`} />
                 </div>
                 <div className="relative w-full p-3">
                     <span className="font-bold text-gray-700 dark:text-gray-400">#{padLeft(renderData("id"), 4, "0")}</span>

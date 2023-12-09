@@ -1,0 +1,52 @@
+.pokeCardAnimated {
+    animation-name: cardAppearance;
+    animation-duration: 0.2s;
+}
+
+@keyframes cardAppearance {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.pokeballSpin {
+    animation-name: shakingBall;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    transform-origin: center center;
+    animation-direction: alternate;
+    opacity: 0.76;
+}
+
+
+@keyframes shakingBall {
+    from {
+        transform: rotate(-23deg);
+    }
+
+    to {
+        transform: rotate(23deg);
+    }
+}
+
+.pokeShow {
+    animation-name: showPokemon;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+}
+
+@keyframes showPokemon {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

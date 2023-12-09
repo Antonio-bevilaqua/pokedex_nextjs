@@ -42,7 +42,7 @@ export default function RootLayout({
                 }}>
                     <Header />
                     <div className="flex w-full justify-center">
-                        <div className="w-full bg-gray-500/40 dark:bg-gray-900/40 min-h-screen flex justify-center" >
+                        <div className="w-full bg-gray-500/40 dark:bg-gray-900/40 h-full flex justify-center" >
                             <div className="w-full lg:max-w-screen-lg sm:max-w-screen-sm bg-gray-200 dark:bg-gray-700/80 min-h-screen rounded-xl p-4">
                                 {children}
                             </div>
