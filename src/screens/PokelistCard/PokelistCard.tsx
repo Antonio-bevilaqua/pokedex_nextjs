@@ -95,7 +95,7 @@ const PokelistCard = ({ pokemon, index }: Props) => {
                 </div>
                 <div className="relative w-full p-3">
                     <span className="font-bold text-gray-700 dark:text-gray-400">#{padLeft(renderData("id"), 4, "0")}</span>
-                    <div className='grid grid-cols-2 gap-2 mt-4'>
+                    <div className='grid grid-cols-2 xs:grid-cols-1 gap-2 mt-4'>
                         {data !== null && (
                             <>
                                 {data.types.map((typeData: any, index: number) => (
