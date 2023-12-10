@@ -111,20 +111,11 @@ class DataFetcherService {
     async fetchData() {
         this._mountFetchUri();
 
-        const cachedData = this._getCachedData();
-        if (cachedData !== null) {
-            return cachedData;
-        }
-
         this._mountFetchOptions();
         try {
             const response = await fetch(this.actualFetchUri, this.fetchOptions);
 
             this.result = await response.json();
-
-            if (this.result !== null) {
-                this._cacheResultData(this.result);
-            }
 
             return structuredClone(this.result);
         } catch (error) {
@@ -150,23 +141,6 @@ class DataFetcherService {
         if (this.payLoad !== null) {
             this.fetchOptions.body = JSON.stringify(this.payLoad);
         }
-    }
-
-    _getCachedData() {
-        if (this.method !== "GET") return null;
-
-        let dataKey = encodeURIComponent(this.actualFetchUri.replace(this.apiUrl, ''));
-        const service = new CacheStoringService();
-        return structuredClone(service.get(dataKey));
-    }
-
-    _cacheResultData(result) {
-        //atualmente cacheando apenas requisições GET pois a api do pokemon recebe apenas este método
-        if (this.method !== "GET") return;
-
-        let dataKey = encodeURIComponent(this.actualFetchUri.replace(this.apiUrl, ''));
-        const service = new CacheStoringService();
-        service.store(dataKey, result);
     }
 }
 
