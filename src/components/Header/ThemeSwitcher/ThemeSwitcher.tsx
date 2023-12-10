@@ -3,7 +3,7 @@ import ThemeContext from '../../../contexts/ThemeContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = ({ className = "" }: { className?: string }) => {
     const { theme, setTheme } = useContext(ThemeContext);
 
     const toggleTheme = () => {
@@ -16,7 +16,7 @@ const ThemeSwitcher = () => {
 
     return (
         <button
-            className="theme-switcher bg-neutral-600 w-10 h-6 sm:w-14 sm:h-6 rounded-xl flex relative items-center"
+            className={"theme-switcher bg-neutral-600 w-10 h-6 sm:w-14 sm:h-6 rounded-xl flex relative items-center " + className}
             onClick={toggleTheme}
         >
             <div className={`

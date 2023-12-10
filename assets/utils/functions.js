@@ -142,12 +142,16 @@ const kgText = (kgVal) => {
 export const getFlavorText = (entries) => {
     let filters = entries.filter((entry) => entry.language.name === "pt-BR");
 
-    if (filters.length > 1) {
+    if (filters.length > 0) {
         return normalizeFilters(filters);
     }
 
     filters = entries.filter((entry) => entry.language.name === "en");
-    return normalizeFilters(filters);
+    if (filters.length > 0) {
+        return normalizeFilters(filters);
+    }
+
+    return "Não possui um texto personalizado.";
 }
 
 const normalizeFilters = (filters) => {
@@ -165,4 +169,28 @@ export const getFemaleGenderPercentage = (species) => {
 
 export const getMaleGenderPercentage = (species) => {
     return 100 - getFemaleGenderPercentage(species);
+}
+
+export const searchSprite = (pokemon) => {
+    if (pokemon.sprites.other['official-artwork'].front_default !== null) {
+        return pokemon.sprites.other['official-artwork'].front_default;
+    }
+
+    return searchValueInSprites(pokemon.sprites);
+}
+
+export const searchValueInSprites = (sprites) => {
+    for (let key in sprites) {
+        if (sprites[key] === null) {
+            continue;
+        }
+
+        if (typeof sprites[key] === "string") return sprites[key];
+
+        if (typeof sprites[key] === Object) {
+            return searchValueInSprites(sprites[key]);
+        }
+    }
+
+    return null;
 }

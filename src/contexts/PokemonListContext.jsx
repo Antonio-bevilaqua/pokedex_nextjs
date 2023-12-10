@@ -7,9 +7,15 @@ export const PokemonContext = React.createContext({
     pokemonList: [],
     limit: null,
     offset: null,
-    setPokemonList: () => { },
-    loadMore: () => { },
-    changeLimit: () => { },
+    sort: "id",
+    order: "asc",
+    maxPages: null,
+    setPokemonList: (val) => { },
+    loadMore: (val) => { },
+    changeLimit: (val) => { },
+    setSort: (val) => { },
+    setOrder: (val) => { },
+    loadPage: (val) => { },
 });
 
 export default function PokemonListContext({ children }) {
@@ -19,27 +25,34 @@ export default function PokemonListContext({ children }) {
     const [pokemonList, setPokemonList] = useState([]);
     const [limit, setLimit] = useState(12);
     const [offset, setOffset] = useState(0);
+    const [maxPages, setMaxPages] = useState(1);
+    const [sort, setSort] = useState("id");
+    const [order, setOrder] = useState("asc");
     const { getPaginated } = usePokemonIntegrator();
 
     const initialLoad = async () => {
         const data = await getPaginated(0, 2000);
-
-        setFullPokemonList(data.map((element, index) => { return { ...element, id: index + 1 }; }));
+        let fullPokelist = data.map((element, index) => { return { ...element, id: index + 1 }; });
+        setFullPokemonList(fullPokelist);
+        setMaxPages(Math.ceil(fullPokelist.length / limit));
+        setReady(true);
         return data;
     }
 
     const loadMore = async () => {
         let actualList = [...fullPokemonList];
-        if (actualList.length === 0) {
-            actualList = await initialLoad();
-        }
-
         let toShowList = actualList.slice(0, offset + limit);
 
         let newOffset = offset + limit;
         setOffset(newOffset);
         setPokemonList([...toShowList]);
-        setReady(true);
+    }
+
+    const loadPage = async (page) => {
+        let pageOffset = (page - 1) * limit;
+        let actualList = [...fullPokemonList];
+        let toShowList = actualList.slice(pageOffset, pageOffset + limit);
+        setPokemonList([...toShowList]);
     }
 
     const changeLimit = async (newLimit) => {
@@ -50,13 +63,33 @@ export default function PokemonListContext({ children }) {
         setPokemonList(data);
     }
 
+    const sortElements = () => {
+        let newPokemonList = fullPokemonList.sort((a, b) => {
+            let first = order === "asc" ? a[sort] : b[sort];
+            let second = order === "asc" ? b[sort] : a[sort];
+
+            if (first < second) return -1;
+            if (second > first) return 1;
+            return b;
+        });
+        setFullPokemonList(newPokemonList);
+        let actualList = [...newPokemonList];
+        let toShowList = actualList.slice(0, limit);
+        setOffset(limit);
+        setPokemonList([...toShowList]);
+    }
+
     useEffect(() => {
-        loadMore();
+        initialLoad();
     }, []);
 
     useEffect(() => {
         localStorage.setItem("actual_scroll_position", getRawPosition());
     }, [scrollPosition]);
+
+    useEffect(() => {
+        sortElements();
+    }, [sort, order]);
 
     if (!ready) return <></>;
 
@@ -64,11 +97,17 @@ export default function PokemonListContext({ children }) {
         <PokemonContext.Provider value={{
             fullPokemonList,
             pokemonList,
-            setPokemonList,
             limit,
             offset,
+            sort,
+            order,
+            maxPages,
+            loadPage,
+            setPokemonList,
             loadMore,
             changeLimit,
+            setSort,
+            setOrder,
         }}>
             {children}
         </PokemonContext.Provider>

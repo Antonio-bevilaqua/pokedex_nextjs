@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PokemonContext } from '../../contexts/PokemonListContext';
 import PokelistCard from '../../components/PokelistCard/PokelistCard';
-import useScrollTracker from '../../hooks/useScrollTracker';
-import PokelistSortButtons from './PokelistSortButtons';
+import PokelistSortButtons from '../PokelistScreen/PokelistSortButtons';
+import Pagination from '../../components/Pagination/Pagination';
 
-const PokeListScreen = () => {
-    const { loadMore, pokemonList, limit } = useContext(PokemonContext);
-    const { scrollPosition, getTotalScrollHeight } = useScrollTracker();
+const PokePaginatedScreen = ({ params }) => {
+    const page = parseInt(params.pagina);
+    const { pokemonList, limit, loadPage } = useContext(PokemonContext);
 
     const generateInitialList = () => {
         let arr = [];
@@ -19,13 +19,7 @@ const PokeListScreen = () => {
     const initialList = generateInitialList();
 
     useEffect(() => {
-        if (scrollPosition >= getTotalScrollHeight() - 200) {
-            loadMore();
-        }
-    }, [scrollPosition]);
-
-    useEffect(() => {
-        loadMore();
+        loadPage(page);
     }, []);
 
     if (pokemonList.length === 0) {
@@ -44,13 +38,15 @@ const PokeListScreen = () => {
     return (
         <div>
             <PokelistSortButtons />
+            <Pagination className="w-full justify-center" actualPage={page} />
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {pokemonList.map((pokemon, index) => (
                     <PokelistCard pokemon={pokemon} key={`poke${index}`} index={index} />
                 ))}
             </div>
+            <Pagination className="w-full justify-center" actualPage={page} />
         </div>
     )
 }
 
-export default PokeListScreen
+export default PokePaginatedScreen

@@ -6,7 +6,7 @@ import "./Searchbar.css";
 import { useRouter } from 'next/navigation';
 import usePokemonFetcher from '../../../hooks/usePokemonFetcher';
 
-const Searchbar = () => {
+const Searchbar = ({ className = "" }: { className?: string }) => {
     const router = useRouter();
     const { fullPokemonList } = useContext(PokemonContext);
     const { api_url } = usePokemonFetcher();
@@ -25,7 +25,7 @@ const Searchbar = () => {
     }
 
     return (
-        <div className="searchInput flex sm:w-56 flex-1 max-w-full relative items-center pl-5 p-2">
+        <div className={"searchInput sm:w-56 flex-1 max-w-full relative items-center pl-5 p-2 " + className} >
             <span className="absolute right-4 pt-2 text-gray-500 dark:text-gray-800 pb-2"><FontAwesomeIcon icon={faSearch} /></span>
             <input
                 placeholder='Buscar...'

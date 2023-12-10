@@ -18,9 +18,3 @@
 .searchInput:focus-within .searchbar {
     display: block;
 }
-
-@media only screen and (max-width: 300px) {
-    .searchInput {
-        display: none;
-    }
-}

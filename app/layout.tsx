@@ -70,7 +70,7 @@ export default function RootLayout({
                         {ready && (
                             <div className="flex w-full justify-center">
                                 <div className="w-full bg-gray-500/40 dark:bg-gray-900/40 h-full flex justify-center" >
-                                    <div className="w-full lg:max-w-screen-lg sm:max-w-screen-sm bg-gray-200 dark:bg-gray-700/80 min-h-screen rounded-xl p-4 pt-14">
+                                    <div className="w-full lg:max-w-screen-lg sm:max-w-screen-sm bg-gray-200 dark:bg-gray-700/80 min-h-screen rounded-xl p-4 pt-20 mt-2">
                                         {children}
                                     </div>
                                 </div>

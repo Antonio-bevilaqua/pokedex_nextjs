@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import usePokemonIntegrator from '../../hooks/usePokemonIntegrator';
-import { renderData } from '../../../assets/utils/functions';
+import { searchSprite } from '../../../assets/utils/functions';
 import Spinner from '../../components/Spinners/Spinner';
 import DamageRelations from './DamageRelations/DamageRelations';
 import StatisticsCard from './StatisticsCard/StatisticsCard';
@@ -10,6 +10,7 @@ import EvolutionChainCard from './EvolutionChainCard/EvolutionChainCard';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import NoSprite from "../../../assets/images/NoSprite.png";
 
 const PokemonScreen = ({ params }) => {
     const id = params.id;
@@ -24,6 +25,14 @@ const PokemonScreen = ({ params }) => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    const getSprite = () => {
+        let sprite = searchSprite(pokemon);
+        if (sprite === null) {
+            return NoSprite.src;
+        }
+        return sprite;
+    }
 
 
 
@@ -43,8 +52,8 @@ const PokemonScreen = ({ params }) => {
                 </Link>
             </div>
             <div className="p-4 pt-2 grid gap-8 grid-cols-1 lg:grid-cols-2">
-                <div className="bg-gray-400 dark:bg-gray-600 rounded-xl">
-                    <img src={renderData(pokemon, "sprites.other.official-artwork.front_default")} />
+                <div className="bg-gray-400 dark:bg-gray-600 rounded-xl flex justify-center items-center">
+                    <img src={getSprite()} />
                 </div>
                 <StatisticsCard pokemon={pokemon} />
             </div>
