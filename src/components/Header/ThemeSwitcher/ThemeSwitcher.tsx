@@ -16,13 +16,14 @@ const ThemeSwitcher = () => {
 
     return (
         <button
-            className="theme-switcher bg-neutral-600 w-14 h-6 rounded-xl flex relative items-center"
+            className="theme-switcher bg-neutral-600 w-10 h-6 sm:w-14 sm:h-6 rounded-xl flex relative items-center"
             onClick={toggleTheme}
         >
             <div className={`
                 border-2 
-                rounded-full 
-                w-7 h-7 
+                rounded-full
+                w-6 h-6
+                sm:w-7 sm:h-7
                 flex 
                 justify-center 
                 items-center 

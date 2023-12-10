@@ -15,6 +15,10 @@ const useScrollTracker = () => {
             document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight)
     }
 
+    const getRawPosition = () => {
+        return scrollPosition === 0 ? 0 : scrollPosition - window.innerHeight;
+    }
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
 
@@ -23,7 +27,7 @@ const useScrollTracker = () => {
         }
     }, [])
 
-    return { scrollPosition, getTotalScrollHeight };
+    return { scrollPosition, getTotalScrollHeight, getRawPosition };
 }
 
 export default useScrollTracker

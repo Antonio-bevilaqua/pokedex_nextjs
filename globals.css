@@ -142,3 +142,42 @@ table {
     -webkit-text-stroke: 2px #3761A8;
     text-stroke: 2px #3761A8;
 }
+
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: rgb(23 23 23) rgb(38 38 38);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #64748b;
+}
+
+.dark *::-webkit-scrollbar-track {
+    background: #4b5563;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 10px;
+    border: 1px solid #4b5563;
+}
+
+.dark *::-webkit-scrollbar-thumb {
+    background-color: #111827;
+    border-radius: 10px;
+    border: 1px solid #bae6fd;
+}
+
+@media screen and (max-width: 640px) {
+    .text-stroke-2 {
+        -webkit-text-stroke: 1px #3761A8;
+        text-stroke: 1px #3761A8;
+    }
+}

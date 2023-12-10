@@ -50,3 +50,44 @@
         opacity: 1;
     }
 }
+
+.pokeballHide {
+    animation-name: pokeballHide;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    transform-origin: center center;
+    animation-fill-mode: forwards;
+}
+
+@keyframes pokeballHide {
+    from {
+        opacity: 1;
+        scale: 1;
+    }
+
+    to {
+        opacity: 0;
+        scale: 0;
+    }
+}
+
+.pokemonShow {
+    animation-name: pokeAppear;
+    animation-delay: 0.5ms;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    transform-origin: center center;
+    animation-fill-mode: forwards;
+}
+
+@keyframes pokeAppear {
+    from {
+        opacity: 0;
+        scale: 0;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}

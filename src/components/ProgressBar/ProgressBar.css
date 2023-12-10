@@ -1,0 +1,17 @@
+.animated .progress-bar {
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: progressBar;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+}
+
+@keyframes progressBar {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(100%);
+    }
+}

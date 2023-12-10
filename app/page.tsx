@@ -1,13 +1,5 @@
 "use client";
 
-import PokemonListContext from "../src/contexts/PokemonListContext";
-import PokeListScreen from "../src/screens/PokeListScreen";
+import PokeListScreen from "../src/screens/PokelistScreen/PokeListScreen";
 
-export default function Page() {
-
-    return (
-        <PokemonListContext>
-            <PokeListScreen />
-        </PokemonListContext>
-    );
-}
+export default PokeListScreen;

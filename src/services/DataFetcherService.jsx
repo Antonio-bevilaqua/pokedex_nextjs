@@ -1,11 +1,13 @@
+import CacheStoringService from "./cache/CacheStoringService";
+
 class DataFetcherService {
     constructor(defaultUrl) {
         this.apiUrl = defaultUrl;
         this.params = [];
-        this.cachedResults = {};
         this.queryString = null;
         this.payLoad = null;
-        this.results = null;
+        this.response = null;
+        this.result = null;
         this.actualFetchUri = null;
         this.method = null;
         this.endpoint = null;
@@ -110,7 +112,7 @@ class DataFetcherService {
         this._mountFetchUri();
 
         const cachedData = this._getCachedData();
-        if (this._getCachedData() !== null) {
+        if (cachedData !== null) {
             return cachedData;
         }
 
@@ -118,13 +120,13 @@ class DataFetcherService {
         try {
             const response = await fetch(this.actualFetchUri, this.fetchOptions);
 
-            const result = await response.json();
+            this.result = await response.json();
 
-            if (result !== null) {
-                this._cacheResultData(result);
+            if (this.result !== null) {
+                this._cacheResultData(this.result);
             }
 
-            return result;
+            return structuredClone(this.result);
         } catch (error) {
             this.lastError = error;
             return null;
@@ -132,6 +134,8 @@ class DataFetcherService {
     }
 
     _mountFetchUri() {
+        this.response = null;
+        this.result = null;
         this.actualFetchUri = this.apiUrl + this.endpoint;
         if (typeof this.queryString === 'string') {
             this.actualFetchUri += this.queryString;
@@ -151,26 +155,18 @@ class DataFetcherService {
     _getCachedData() {
         if (this.method !== "GET") return null;
 
-        let dataKey = encodeURIComponent(this.actualFetchUri);
-        const value = localStorage.getItem(dataKey);
-
-        if (value === null) return value;
-
-        return JSON.parse(value);
+        let dataKey = encodeURIComponent(this.actualFetchUri.replace(this.apiUrl, ''));
+        const service = new CacheStoringService();
+        return structuredClone(service.get(dataKey));
     }
 
     _cacheResultData(result) {
         //atualmente cacheando apenas requisições GET pois a api do pokemon recebe apenas este método
         if (this.method !== "GET") return;
 
-        let dataKey = encodeURIComponent(this.actualFetchUri);
-        try {
-            localStorage.setItem(dataKey, JSON.stringify(result));
-        } catch (error) {
-            console.warn(error, "limpando local storage...");
-            localStorage.clear();
-            localStorage.setItem(dataKey, JSON.stringify(result));
-        }
+        let dataKey = encodeURIComponent(this.actualFetchUri.replace(this.apiUrl, ''));
+        const service = new CacheStoringService();
+        service.store(dataKey, result);
     }
 }
 

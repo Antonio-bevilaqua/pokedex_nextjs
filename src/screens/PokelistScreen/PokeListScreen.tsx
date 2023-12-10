@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { PokemonContext } from '../contexts/PokemonListContext';
-import PokelistCard from './PokelistCard/PokelistCard';
-import useScrollTracker from '../hooks/useScrollTracker';
+import { PokemonContext } from '../../contexts/PokemonListContext';
+import PokelistCard from '../../components/PokelistCard/PokelistCard';
+import useScrollTracker from '../../hooks/useScrollTracker';
 
 const PokeListScreen = () => {
     const { loadMore, pokemonList, limit } = useContext(PokemonContext);
@@ -18,10 +18,6 @@ const PokeListScreen = () => {
     const initialList = generateInitialList();
 
     useEffect(() => {
-        loadMore();
-    }, []);
-
-    useEffect(() => {
         if (scrollPosition >= getTotalScrollHeight() - 200) {
             loadMore();
         }
@@ -29,7 +25,7 @@ const PokeListScreen = () => {
 
     if (pokemonList.length === 0) {
         return (
-            <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4 mt-9'>
+            <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {initialList.map((nullable, index) => (
                     <PokelistCard pokemon={nullable} key={`poke${index}`} index={index} />
                 ))}
@@ -38,7 +34,7 @@ const PokeListScreen = () => {
     }
 
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4 mt-9'>
+        <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
             {pokemonList.map((pokemon, index) => (
                 <PokelistCard pokemon={pokemon} key={`poke${index}`} index={index} />
             ))}
