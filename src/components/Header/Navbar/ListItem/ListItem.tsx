@@ -81,12 +81,13 @@ const ListItem = ({ href, border, children = null, className = "", activeRoute, 
             after:min-[300px]:absolute
             after:min-[300px]:bottom-[-4px]
             after:min-[300px]:z-50
+            after:pointer-events-none
             text-sm
             sm:text-lg
             ${isActive() ? activeBg[border] : 'text-gray-700 dark:text-sky-200'}
             ${className}
         `} style={{ zIndex: 70 }}>
-            <Link href={href} className="w-full h-full text-center pl-5 pr-5">
+            <Link href={href} className="w-full h-full text-center flex items-center justify-center gap-1 pl-5 pr-5" style={{ zIndex: 71 }}>
                 {children}
             </Link>
         </li>

@@ -8,6 +8,7 @@ const Link = ({ href, children, ...props }) => {
   const theme = useContext(ThemeContext);
 
   const willRedirect = () => {
+    console.log("called "+href);
     if (pathname === href) return;
     theme.setReady(false);
   }
