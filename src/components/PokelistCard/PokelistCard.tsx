@@ -26,6 +26,7 @@ const PokelistCard = ({ pokemon, index }: Props) => {
     const { integrateData } = usePokemonIntegrator();
     const { limit } = useContext(PokemonContext);
     const [data, setData] = useState(null);
+    const [loaded, setLoaded] = useState(false);
 
     const getPokeData = async () => {
         const result = await integrateData(pokemon);
@@ -33,6 +34,8 @@ const PokelistCard = ({ pokemon, index }: Props) => {
     }
 
     useEffect(() => {
+        setData(null);
+        setLoaded(false);
         if (pokemon !== null) {
             getPokeData();
         }
@@ -65,8 +68,14 @@ const PokelistCard = ({ pokemon, index }: Props) => {
                     }}>
                     <div className="relative flex justify-center items-center w-full rounded-lg bg-gray-500 dark:bg-gray-700 overflow-hidden max-w-sm">
                         <Image alt="" src={PokeballBackground} className="absolute top-0 left-0 opacity-20 w-2/3 z-0" />
-                        <img src={PokeballImage.src} className={`relative max-w-100 z-10 ${data === null ? "pokeballSpin" : "pokeballHide"}`} />
-                        {data !== null && <img src={getSprite()} className={`absolute max-w-100 z-20 pokemonShow`} />}
+                        <img src={PokeballImage.src} className={`relative max-w-100 z-10 ${data === null || !loaded ? "pokeballSpin" : "pokeballHide"}`} />
+                        {data !== null && (
+                            <img
+                                src={getSprite()}
+                                onLoad={() => setLoaded(true)}
+                                className={`absolute max-w-100 z-20 ${loaded ? "pokemonShow" : "opacity-0 scale-0"}`}
+                            />
+                        )}
                     </div>
                     <div className="relative w-full p-3">
                         <h4 className='text-gray-700 dark:text-sky-200 text-xl pb-1 w-full font-extrabold capitalize flex gap-2 items-center'>
