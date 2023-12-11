@@ -38,6 +38,7 @@ const PokePaginatedScreen = ({ params }) => {
 
     return (
         <div>
+            <title>PokéDB | Paginado</title>
             <PokelistSortButtons />
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {pokemonList.map((pokemon, index) => (

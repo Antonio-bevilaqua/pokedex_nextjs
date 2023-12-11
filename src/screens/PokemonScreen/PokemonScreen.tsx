@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from 'react'
 import usePokemonIntegrator from '@/hooks/usePokemonIntegrator';
-import { searchSprite } from '@/assets/utils/functions';
+import { searchSprite, ucfirst } from '@/assets/utils/functions';
 import DamageRelations from './DamageRelations/DamageRelations';
 import StatisticsCard from './StatisticsCard/StatisticsCard';
 import EvolutionChainCard from './EvolutionChainCard/EvolutionChainCard';
@@ -45,11 +45,12 @@ const PokemonScreen = ({ params }) => {
 
 
     if (!pokemonData) {
-        return <Preloader ready={pokemonData !== null}  className="top-0 min-[300px]:top-24 left-0" />;
+        return <Preloader ready={pokemonData !== null} className="top-0 min-[300px]:top-24 left-0" />;
     }
 
     return (
         <>
+            <title>{`PokéDB | ${ucfirst(pokemonData.name)}`}</title>
             <div className='pt-4 pl-4'>
                 <a href="#" onClick={() => goBack()} className="text-sky-600 dark:text-sky-200 transition-opacity hover:opacity-70 text-md font-bold">
                     <FontAwesomeIcon icon={faArrowLeft} /> Voltar à Lista

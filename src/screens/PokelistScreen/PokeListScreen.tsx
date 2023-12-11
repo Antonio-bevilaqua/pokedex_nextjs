@@ -31,6 +31,7 @@ const PokeListScreen = () => {
     if (pokemonList.length === 0) {
         return (
             <div>
+                <title>PokéDB | Listagem</title>
                 <PokelistSortButtons resetListingOnSort={true} />
                 <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                     {initialList.map((nullable, index) => (
@@ -43,6 +44,7 @@ const PokeListScreen = () => {
 
     return (
         <div>
+            <title>PokéDB | Listagem</title>
             <PokelistSortButtons resetListingOnSort={true} />
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {pokemonList.map((pokemon, index) => (

@@ -44,6 +44,7 @@ const PokeTableScreen = ({ params }) => {
 
     return (
         <div>
+            <title>PokéDB | Tabela</title>
             <PokelistSortButtons />
             <div className='p-4 w-full'>
                 <Table className="table-fixed">

@@ -10,6 +10,7 @@ import Preloader from '@/screens/Preloader/Preloader';
 import PokemonListContext from '@/contexts/PokemonListContext';
 import BackToTop from '@/components/BackToTop/BackToTop';
 import { usePathname } from 'next/navigation';
+import favicon from "@/assets/pokemon_fav.png";
 
 const pokemonSolid = localFont({
     src: '../assets/fonts/Pokemon Solid.ttf',
@@ -60,6 +61,10 @@ export default function RootLayout({
             setReady,
         }}>
             <html lang="en" className={actualTheme === "dark" ? "dark" : ""}>
+                <head>
+                    <title>PokéDB</title>
+                    <link rel="icon" type="image/png" href={favicon.src} />
+                </head>
                 <body className={`${pokemonHollow.variable} ${pokemonSolid.variable} ${openSans.variable} bg-gray-200 dark:bg-gray-900`} style={{
                     backgroundImage: `url(${background.src})`,
                     backgroundRepeat: "repeat",
