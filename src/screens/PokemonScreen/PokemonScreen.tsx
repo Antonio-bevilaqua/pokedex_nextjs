@@ -16,13 +16,14 @@ const PokemonScreen = ({ params }) => {
     const router = useRouter()
     const id = params.id;
     const { setReady } = useContext(ThemeContext);
-    const [pokemon, setPokemon] = useState(null);
+    const [pokemonData, setPokemonData] = useState(null);
     const { getPokemonById } = usePokemonIntegrator();
 
     const fetchData = async () => {
+        if (pokemonData !== null) return;
         setReady(false);
         const data = await getPokemonById(id);
-        setPokemon(data);
+        setPokemonData(data);
         setReady(true);
     }
 
@@ -30,8 +31,14 @@ const PokemonScreen = ({ params }) => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        if (pokemonData !== null) {
+            setReady(true);
+        }
+    }, [pokemonData]);
+
     const getSprite = () => {
-        let sprite = searchSprite(pokemon);
+        let sprite = searchSprite(pokemonData);
         if (sprite === null) {
             return NoSprite.src;
         }
@@ -44,7 +51,7 @@ const PokemonScreen = ({ params }) => {
     }
 
 
-    if (!pokemon) {
+    if (!pokemonData) {
         return null;
     }
 
@@ -59,7 +66,7 @@ const PokemonScreen = ({ params }) => {
                 <div className="bg-gray-400 dark:bg-gray-600 rounded-xl flex justify-center items-center">
                     <img src={getSprite()} />
                 </div>
-                <StatisticsCard pokemon={pokemon} />
+                <StatisticsCard pokemon={pokemonData} />
             </div>
             <div className="p-4 mt-4 grid gap-8 grid-cols-1 sm:grid-cols-2 border-solid border-t-2 border-gray-600 dark:border-sky-200">
                 <div>
@@ -70,7 +77,7 @@ const PokemonScreen = ({ params }) => {
                     </div>
 
                     <div className='mt-2 grid grid-cols-2 xl:grid-cols-3 gap-2'>
-                        <DamageRelations types={pokemon.types} relation="damage" />
+                        <DamageRelations types={pokemonData.types} relation="damage" />
                     </div>
                 </div>
                 <div>
@@ -81,7 +88,7 @@ const PokemonScreen = ({ params }) => {
                     </div>
 
                     <div className='mt-2 grid grid-cols-2 xl:grid-cols-3 gap-2'>
-                        <DamageRelations types={pokemon.types} relation="defense" />
+                        <DamageRelations types={pokemonData.types} relation="defense" />
                     </div>
                 </div>
             </div>
@@ -92,7 +99,7 @@ const PokemonScreen = ({ params }) => {
                     </h2>
                 </div>
 
-                <EvolutionChainCard pokemon={pokemon} />
+                <EvolutionChainCard pokemon={pokemonData} />
             </div>
         </>
     )

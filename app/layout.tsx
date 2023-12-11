@@ -31,7 +31,7 @@ export default function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    const [theme, setTheme] = useState(null);
+    const [actualTheme, setActualTheme] = useState(null);
     const [ready, setReady] = useState(true);
     const [loaded, setLoaded] = useState(false);
     const pathname = usePathname();
@@ -39,32 +39,27 @@ export default function RootLayout({
     useEffect(() => {
         let ntheme = localStorage.getItem("theme");
         if (ntheme === null || ntheme === "null") ntheme = "dark";
-        setTheme(ntheme);
-    }, [])
+        setActualTheme(ntheme);
+        if (!loaded) setLoaded(true);
+    }, []);
+
+    const setTheme = (val: "light" | "dark") => {
+        setActualTheme(val);
+        localStorage.setItem("theme", val);
+    }
 
     useEffect(() => {
-        if (theme !== null) {
-            try {
-                localStorage.setItem("theme", theme);
-                setLoaded(true);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }, [theme]);
-
-    useEffect(() => {
-        setReady(true);
+        if (!ready) setReady(true);
     }, [pathname]);
 
     return (
         <ThemeContext.Provider value={{
-            theme,
+            theme: actualTheme,
             setTheme,
             ready,
             setReady,
         }}>
-            <html lang="en" className={theme === "dark" ? "dark" : ""}>
+            <html lang="en" className={actualTheme === "dark" ? "dark" : ""}>
                 <body className={`${pokemonHollow.variable} ${pokemonSolid.variable} ${openSans.variable} bg-gray-200 dark:bg-gray-900`} style={{
                     backgroundImage: `url(${background.src})`,
                     backgroundRepeat: "repeat",
@@ -75,15 +70,13 @@ export default function RootLayout({
                     <PokemonListContext>
                         <Header />
 
-                        {ready && loaded && (
-                            <div className="flex w-full justify-center">
-                                <div className="w-full bg-gray-500/40 dark:bg-gray-900/40 h-full flex justify-center" >
-                                    <div className="w-full lg:max-w-screen-lg sm:max-w-screen-sm bg-gray-200 dark:bg-gray-700/80 min-h-screen rounded-xl p-4 pt-48 mt-10 min-[300px]:pt-20 min-[300px]:mt-2">
-                                        {children}
-                                    </div>
+                        <div className="flex w-full justify-center">
+                            <div className="w-full bg-gray-500/40 dark:bg-gray-900/40 h-full flex justify-center" >
+                                <div className="w-full lg:max-w-screen-lg sm:max-w-screen-sm bg-gray-200 dark:bg-gray-700/80 min-h-screen rounded-xl p-4 pt-48 mt-10 min-[300px]:pt-20 min-[300px]:mt-2">
+                                    {children}
                                 </div>
                             </div>
-                        )}
+                        </div>
 
                         <BackToTop />
                     </PokemonListContext>
