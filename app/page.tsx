@@ -1,5 +1,5 @@
 "use client";
 
-import PokeListScreen from "../src/screens/PokelistScreen/PokeListScreen";
+import PokeListScreen from "@/screens/PokelistScreen/PokeListScreen";
 
 export default PokeListScreen;

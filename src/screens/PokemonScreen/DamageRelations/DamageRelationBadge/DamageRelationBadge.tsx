@@ -1,5 +1,5 @@
 import React from 'react'
-import PokeType from '../../../../components/PokeType/PokeType'
+import PokeType from '@/components/Pokemon/PokeType/PokeType'
 
 type Props = {
     type: "damage" | "defense",

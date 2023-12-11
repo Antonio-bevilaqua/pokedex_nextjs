@@ -1,15 +1,15 @@
 "use client";
 import localFont from 'next/font/local';
 import { Open_Sans } from "next/font/google";
-import "../globals.css";
+import "@/styles/globals.css";
 import { useEffect, useState } from "react";
-import ThemeContext from "../src/contexts/ThemeContext";
-import Header from "../src/components/Header/Header";
-import background from '../assets/images/textura-background.png'
-import Preloader from '../src/screens/Preloader/Preloader';
-import PokemonListContext from '../src/contexts/PokemonListContext';
-import CacheStoringService from '../src/services/cache/CacheStoringService';
-import BackToTop from '../src/components/BackToTop/BackToTop';
+import ThemeContext from "@/contexts/ThemeContext";
+import Header from "@/components/Header/Header";
+import background from '@/assets/images/textura-background.png'
+import Preloader from '@/screens/Preloader/Preloader';
+import PokemonListContext from '@/contexts/PokemonListContext';
+import CacheStoringService from '@/services/cache/CacheStoringService';
+import BackToTop from '@/components/BackToTop/BackToTop';
 
 const pokemonSolid = localFont({
     src: '../assets/fonts/Pokemon Solid.ttf',

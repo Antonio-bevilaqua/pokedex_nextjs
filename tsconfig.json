@@ -20,7 +20,37 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/app/*": [
+        "app/*"
+      ],
+      "@/assets/*": [
+        "assets/*"
+      ],
+      "@/src/*": [
+        "src/*"
+      ],
+      "@/styles/*": [
+        "src/styles/*"
+      ],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/contexts/*": [
+        "src/contexts/*"
+      ],
+      "@/hooks/*": [
+        "src/hooks/*"
+      ],
+      "@/screens/*": [
+        "src/screens/*"
+      ],
+      "@/services/*": [
+        "src/services/*"
+      ],
+    }
   },
   "include": [
     "next-env.d.ts",

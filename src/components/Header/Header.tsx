@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link';
-import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher';
-import Searchbar from './Searchbar/Searchbar';
-import Navbar from './Navbar/Navbar';
+import ThemeSwitcher from '@/components/Header/ThemeSwitcher/ThemeSwitcher';
+import Searchbar from '@/components/Header/Searchbar/Searchbar';
+import Navbar from '@/components/Header/Navbar/Navbar';
 
 const Header = () => {
 

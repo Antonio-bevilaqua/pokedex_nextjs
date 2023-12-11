@@ -1,4 +1,4 @@
-import usePokemonFetcher from './usePokemonFetcher'
+import usePokemonFetcher from '@/hooks/usePokemonFetcher'
 
 type Pokemon = {
     name: string
@@ -46,18 +46,20 @@ const usePokemonIntegrator = () => {
         return result;
     }
 
-    const integrateData = async (pokemon: Pokemon, withSpecies: boolean = false) => {
+    const integrateData = async (pokemon: Pokemon, withSpecies: boolean = false, withTypes = false) => {
         const result = await fetcher.get(pokemon.url);
         let actualData = {
             ...pokemon,
             ...result,
         };
 
-        if (!withSpecies) {
-            return actualData;
+        if (withSpecies) {
+            actualData = await getSpecies(actualData);
         }
-
-        return await getSpecies(actualData);
+        if (withTypes) {
+            actualData = await getTypes(actualData);
+        }
+        return actualData;
     }
 
     const getSpecies = async (data: any) => {

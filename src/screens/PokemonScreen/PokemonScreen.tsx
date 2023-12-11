@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from 'react'
-import usePokemonIntegrator from '../../hooks/usePokemonIntegrator';
-import { searchSprite } from '../../../assets/utils/functions';
-import Spinner from '../../components/Spinners/Spinner';
+import usePokemonIntegrator from '@/hooks/usePokemonIntegrator';
+import { searchSprite } from '@/assets/utils/functions';
+import Spinner from '@/components/Spinners/Spinner';
 import DamageRelations from './DamageRelations/DamageRelations';
 import StatisticsCard from './StatisticsCard/StatisticsCard';
 import EvolutionChainCard from './EvolutionChainCard/EvolutionChainCard';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import NoSprite from "../../../assets/images/NoSprite.png";
+import NoSprite from "@/assets/images/NoSprite.png";
 import { useRouter } from 'next/navigation';
 
 const PokemonScreen = ({ params }) => {

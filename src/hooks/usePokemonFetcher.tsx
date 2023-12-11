@@ -1,4 +1,4 @@
-import DataFetcherService from "../services/DataFetcherService";
+import DataFetcherService from "@/services/DataFetcherService";
 
 const usePokemonFetcher = () => {
   const api_url = "https://pokeapi.co/api/v2";

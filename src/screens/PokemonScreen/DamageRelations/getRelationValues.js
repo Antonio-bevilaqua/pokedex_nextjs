@@ -1,4 +1,4 @@
-import { typeTranslations } from '../../../../assets/utils/translations'
+import { typeTranslations } from '@/assets/utils/translations'
 
 export const getDamageRelationValues = (types) => {
     let typeValues = {};

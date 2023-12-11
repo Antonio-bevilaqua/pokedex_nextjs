@@ -1,5 +1,5 @@
 import React from 'react'
-import PokelistCard from '../../../../components/PokelistCard/PokelistCard'
+import PokelistCard from '@/components/Pokemon/PokemonCard/PokemonCard'
 
 const EvolutionChainPokemon = ({ pokemon, index }) => {
     return (

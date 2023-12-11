@@ -1,0 +1,38 @@
+.footer {
+    position:fixed;
+    z-index: 90;
+}
+
+.pagination-placeholder {
+    overflow: hidden;
+}
+
+.pagination-footer-container {
+    position: relative;
+}
+
+.pagination-footer-container::before {
+    content: " ";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: -2px;
+    left: -20px;
+    border-radius: 5px;
+    z-index: -1;
+    overflow: hidden;
+    transform:skew(-25deg, 0deg);
+}
+
+.pagination-footer-container::after {
+    content: " ";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: -2px;
+    right: -20px;
+    border-radius: 5px;
+    z-index: -1;
+    overflow: hidden;
+    transform:skew(25deg, 0deg);
+}

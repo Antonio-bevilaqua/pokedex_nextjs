@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { PokemonContext } from '../../contexts/PokemonListContext';
-import PokelistCard from '../../components/PokelistCard/PokelistCard';
-import PokelistSortButtons from '../PokelistScreen/PokelistSortButtons';
-import Pagination from '../../components/Pagination/Pagination';
+import React, { useContext, useEffect } from 'react'
+import { PokemonContext } from '@/contexts/PokemonListContext';
+import PokelistCard from '@/components/Pokemon/PokemonCard/PokemonCard';
+import PokelistSortButtons from '@/components/Pokemon/SortButtons/PokelistSortButtons';
+import Pagination from '@/components/Pagination/Pagination';
+import Footer from '@/src/components/Footer/Footer';
 
 const PokePaginatedScreen = ({ params }) => {
     const page = parseInt(params.pagina);
@@ -38,13 +39,14 @@ const PokePaginatedScreen = ({ params }) => {
     return (
         <div>
             <PokelistSortButtons />
-            <Pagination endpoint="/paginados/" className="w-full justify-center" actualPage={page} />
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {pokemonList.map((pokemon, index) => (
                     <PokelistCard pokemon={pokemon} key={`poke_paginated_${pokemon.id}`} index={index} />
                 ))}
             </div>
-            <Pagination endpoint="/paginados/" className="w-full justify-center" actualPage={page} />
+            <Footer>
+                <Pagination endpoint="/paginados/" className="w-full justify-center" actualPage={page} />
+            </Footer>
         </div>
     )
 }

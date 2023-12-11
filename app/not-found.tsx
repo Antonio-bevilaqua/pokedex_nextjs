@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link"
-import imageNotFound from "../assets/images/404.png";
-import imageNotFoundDark from "../assets/images/404dark.png";
+import imageNotFound from "@/assets/images/404.png";
+import imageNotFoundDark from "@/assets/images/404dark.png";
 import { useContext } from "react";
-import ThemeContext from "../src/contexts/ThemeContext";
+import ThemeContext from "@/contexts/ThemeContext";
 
 const NotFoundPage = () => {
     const { theme } = useContext(ThemeContext);

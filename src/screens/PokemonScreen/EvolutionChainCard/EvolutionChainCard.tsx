@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import usePokemonIntegrator from '../../../hooks/usePokemonIntegrator'
+import usePokemonIntegrator from '@/hooks/usePokemonIntegrator'
 import EvolutionChainPokemon from './EvolutionChainPokemon/EvolutionChainPokemon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDownLong, faArrowRight, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';

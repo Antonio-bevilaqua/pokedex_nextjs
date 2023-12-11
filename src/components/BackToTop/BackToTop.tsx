@@ -1,7 +1,7 @@
 import { faAnglesUp, faArrowUp, faCircleUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import useScrollTracker from '../../hooks/useScrollTracker';
+import useScrollTracker from '@/hooks/useScrollTracker';
 
 const BackToTop = () => {
     const { scrollPosition, getRawPosition } = useScrollTracker();
@@ -25,11 +25,13 @@ const BackToTop = () => {
             type="button"
             onClick={backToTop}
             className={`${showing ? "opacity-70 sm:opacity-1" : "opacity-0 pointer-events-none"} 
-            fixed 
-            bottom-5 
+            fixed
+            bottom-36
             right-5 
             w-12 
             h-12
+            min-[230px]:bottom-24
+            min-[332px]:bottom-12
             transition-all 
             rounded-md
             border-2

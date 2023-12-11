@@ -1,6 +1,6 @@
 import React from 'react'
 
-const borderColor = "border-solid border-gray-400 dark:border-gray-500"
+const borderColor = "border-solid border-gray-400 dark:border-gray-400"
 
 const Table = ({ className = "", children, ...props }) => {
     return (
@@ -15,7 +15,7 @@ const Table = ({ className = "", children, ...props }) => {
 
 const Tr = ({ children, className = "", ...props }) => {
     return (
-        <tr className={`border ${borderColor} ${className}`} {...props} >
+        <tr className={`odd:bg-gray-200 odd:dark:bg-slate-600 even:bg-gray-300 even:dark:bg-slate-700 border ${borderColor} ${className}`} {...props} >
             {children}
         </tr>
     )
@@ -23,7 +23,7 @@ const Tr = ({ children, className = "", ...props }) => {
 
 const Th = ({ children, className = "", ...props }) => {
     return (
-        <th className={`p-4 border ${borderColor} ${className}`} {...props} >
+        <th className={`p-4 border border-solid bg-gray-400 dark:bg-slate-800 border-gray-600 dark:border-sky-200`} {...props} >
             {children}
         </th>
     )

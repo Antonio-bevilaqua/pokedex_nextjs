@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import usePokemonIntegrator from "../hooks/usePokemonIntegrator";
-import useScrollTracker from "../hooks/useScrollTracker";
+import usePokemonIntegrator from "@/hooks/usePokemonIntegrator";
+import useScrollTracker from "@/hooks/useScrollTracker";
 
 export const PokemonContext = React.createContext({
     fullPokemonList: [],
@@ -13,9 +13,8 @@ export const PokemonContext = React.createContext({
     setPokemonList: (val) => { },
     loadMore: (val) => { },
     changeLimit: (val) => { },
-    setSort: (val) => { },
-    setOrder: (val) => { },
     loadPage: (val) => { },
+    sortElements: (sort, order, resetListing = false) => { },
 });
 
 export default function PokemonListContext({ children }) {
@@ -52,6 +51,7 @@ export default function PokemonListContext({ children }) {
         let pageOffset = (page - 1) * limit;
         let actualList = [...fullPokemonList];
         let toShowList = actualList.slice(pageOffset, pageOffset + limit);
+        setOffset(pageOffset);
         setPokemonList([...toShowList]);
     }
 
@@ -63,7 +63,9 @@ export default function PokemonListContext({ children }) {
         setPokemonList(data);
     }
 
-    const sortElements = () => {
+    const sortElements = (sort, order, resetListing = false) => {
+        setSort(sort);
+        setOrder(order);
         let newPokemonList = fullPokemonList.sort((a, b) => {
             let first = order === "asc" ? a[sort] : b[sort];
             let second = order === "asc" ? b[sort] : a[sort];
@@ -73,6 +75,17 @@ export default function PokemonListContext({ children }) {
             return b;
         });
         setFullPokemonList(newPokemonList);
+
+        if (resetListing) {
+            return restartListing(newPokemonList);
+        }
+
+        let actualList = [...newPokemonList];
+        let toShowList = actualList.slice(offset, offset + limit);
+        setPokemonList([...toShowList]);
+    }
+
+    const restartListing = (newPokemonList) => {
         let actualList = [...newPokemonList];
         let toShowList = actualList.slice(0, limit);
         setOffset(limit);
@@ -86,10 +99,6 @@ export default function PokemonListContext({ children }) {
     useEffect(() => {
         localStorage.setItem("actual_scroll_position", getRawPosition());
     }, [scrollPosition]);
-
-    useEffect(() => {
-        sortElements();
-    }, [sort, order]);
 
     if (!ready) return <></>;
 
@@ -106,8 +115,7 @@ export default function PokemonListContext({ children }) {
             setPokemonList,
             loadMore,
             changeLimit,
-            setSort,
-            setOrder,
+            sortElements,
         }}>
             {children}
         </PokemonContext.Provider>

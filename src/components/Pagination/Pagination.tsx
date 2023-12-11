@@ -1,16 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
-import DefaultButton from '../DefaultButton/DefaultButton';
-import { PokemonContext } from '../../contexts/PokemonListContext';
+import React, { useContext } from 'react'
+import Button from '@/components/Button/Button';
+import { PokemonContext } from '@/contexts/PokemonListContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
+import ThemeContext from '@/src/contexts/ThemeContext';
 
 const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: number, className?: string, endpoint: string }) => {
     const router = useRouter();
     const { maxPages } = useContext(PokemonContext);
+    const { theme } = useContext(ThemeContext);
 
     const getPageList = () => {
-        let beginsAt = (actualPage <= 3) ? 1 : actualPage >= maxPages - 2 ? maxPages - 2 : actualPage - 2;
+        let beginsAt = (actualPage <= 3) ? 1 : actualPage >= maxPages - 2 ? maxPages - 4 : actualPage - 2;
         let endsAt = (actualPage <= 3) ? 5 : actualPage >= maxPages - 2 ? maxPages : actualPage + 2;
 
         let values = [];
@@ -21,6 +23,8 @@ const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: numb
     }
 
     const changePage = (val: number) => {
+        if (val === actualPage) return;
+
         endpoint = endpoint[endpoint.length - 1] !== "/" ? endpoint + "/" : endpoint;
 
         router.push(endpoint + val);
@@ -28,17 +32,23 @@ const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: numb
 
     return (
         <div className={"flex flex-wrap gap-2 " + className}>
-            <DefaultButton isActive={false} onClick={() => changePage(1)} disabled={actualPage === 1}>
+            <Button color="theme" inverted={theme === "dark"} bordered onClick={() => changePage(1)} disabled={actualPage === 1}>
                 <FontAwesomeIcon icon={faAnglesLeft} />
-            </DefaultButton>
+            </Button>
+            <Button color="theme" inverted={theme === "dark"} className="hidden sm:block" bordered onClick={() => changePage(actualPage - 1)} disabled={actualPage <= 1}>
+                <FontAwesomeIcon icon={faAngleLeft} />
+            </Button>
             {getPageList().map((page) => (
-                <DefaultButton key={`page${page}`} className="pl-3 pr-3" isActive={page === actualPage} onClick={() => changePage(page)} disabled={actualPage === page}>
+                <Button color="theme" key={`page${page}`} inverted={theme === "dark" && page === actualPage} bordered transparentBg={page !== actualPage} onClick={() => changePage(page)}>
                     {page}
-                </DefaultButton>
+                </Button>
             ))}
-            <DefaultButton isActive={false} onClick={() => changePage(maxPages)} disabled={actualPage === maxPages}>
+            <Button color="theme" inverted={theme === "dark"} bordered className="hidden sm:block" onClick={() => changePage(actualPage + 1)} disabled={actualPage === maxPages}>
+                <FontAwesomeIcon icon={faAngleRight} />
+            </Button>
+            <Button color="theme" inverted={theme === "dark"} bordered onClick={() => changePage(maxPages)} disabled={actualPage === maxPages}>
                 <FontAwesomeIcon icon={faAnglesRight} />
-            </DefaultButton>
+            </Button>
         </div>
     )
 }

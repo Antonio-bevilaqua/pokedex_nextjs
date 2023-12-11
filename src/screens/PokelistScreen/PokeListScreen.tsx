@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
-import { PokemonContext } from '../../contexts/PokemonListContext';
-import PokelistCard from '../../components/PokelistCard/PokelistCard';
-import useScrollTracker from '../../hooks/useScrollTracker';
-import PokelistSortButtons from './PokelistSortButtons';
+import { PokemonContext } from '@/contexts/PokemonListContext';
+import PokelistCard from '@/components/Pokemon/PokemonCard/PokemonCard';
+import useScrollTracker from '@/hooks/useScrollTracker';
+import PokelistSortButtons from '@/components/Pokemon/SortButtons/PokelistSortButtons';
 
 const PokeListScreen = () => {
     const { loadMore, pokemonList, limit } = useContext(PokemonContext);
@@ -31,7 +31,7 @@ const PokeListScreen = () => {
     if (pokemonList.length === 0) {
         return (
             <div>
-                <PokelistSortButtons />
+                <PokelistSortButtons resetListingOnSort={true} />
                 <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                     {initialList.map((nullable, index) => (
                         <PokelistCard pokemon={nullable} key={`poke_list_not_loaded_${index}`} index={index} />
@@ -43,7 +43,7 @@ const PokeListScreen = () => {
 
     return (
         <div>
-            <PokelistSortButtons />
+            <PokelistSortButtons resetListingOnSort={true} />
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {pokemonList.map((pokemon, index) => (
                     <PokelistCard pokemon={pokemon} key={`poke_list_${pokemon.id}`} index={index} />

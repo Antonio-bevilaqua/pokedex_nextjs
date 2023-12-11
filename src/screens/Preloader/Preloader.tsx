@@ -1,5 +1,5 @@
 import React from 'react'
-import Spinner from '../../components/Spinners/Spinner'
+import Spinner from '@/components/Spinners/Spinner'
 
 const Preloader = ({ ready }) => {
   return (

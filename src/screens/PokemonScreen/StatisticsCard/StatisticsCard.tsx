@@ -1,5 +1,5 @@
 import React from 'react'
-import PokeType from '../../../components/PokeType/PokeType';
+import PokeType from '../../../components/Pokemon/PokeType/PokeType';
 import Statistic from './Statistic/Statistic';
 import Attributes from './Attributes/Attributes';
 import {

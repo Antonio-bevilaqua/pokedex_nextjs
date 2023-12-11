@@ -1,5 +1,5 @@
 import React from 'react'
-import "./ProgressBar.css";
+import "@/styles/progressBar/ProgressBar.css";
 
 export enum colorType {
     red = "red",

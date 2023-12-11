@@ -1,5 +1,3 @@
-import CacheStoringService from "./cache/CacheStoringService";
-
 class DataFetcherService {
     constructor(defaultUrl) {
         this.apiUrl = defaultUrl;

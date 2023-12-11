@@ -95,32 +95,38 @@ export const returnLoader = () => {
     return <Spinner />;
 }
 
-export const getHeight = (height) => {
+export const getHeight = (height, compact) => {
     if (height < 10) {
-        return centimetersText(height * 10);
+        return centimetersText(height * 10, compact);
     }
 
     let altura = height / 10;
     if (height % 10 === 0) {
-        return metersText(altura);
+        return metersText(altura, compact);
     }
 
     let splitValue = altura.toFixed(2).toString().split(".");
 
-    return `${metersText(splitValue[0])} e ${centimetersText(splitValue[1])}`;
+    return `${metersText(splitValue[0], compact)} e ${centimetersText(splitValue[1], compact)}`;
 }
 
-const centimetersText = (centimeters) => {
+const centimetersText = (centimeters, compact) => {
+    if (compact) {
+        return parseInt(centimeters) !== 1 ? `${centimeters} cm` : `${centimeters} cm`;
+    }
     return parseInt(centimeters) !== 1 ? `${centimeters} centímetros` : `${centimeters} centímetro`;
 }
 
-const metersText = (meters) => {
+const metersText = (meters, compact) => {
+    if (compact) {
+        return parseInt(meters) !== 1 ? `${meters} m` : `${meters} m`;
+    }
     return parseInt(meters) !== 1 ? `${meters} metros` : `${meters} metro`;
 }
 
-export const getWeight = (weight) => {
+export const getWeight = (weight, compact = false) => {
     if (weight < 100) {
-        return gText(weight * 10);
+        return gText(weight * 10, compact);
     }
 
     let peso = weight / 100;
@@ -131,12 +137,15 @@ export const getWeight = (weight) => {
     return kgText(peso.toFixed(1).toString().replace(".", ","));
 }
 
-const gText = (gVal) => {
+const gText = (gVal, compact = false) => {
+    if (compact) {
+        return parseInt(gVal) !== 1 ? `${gVal} g` : `${gVal} g`;
+    }
     return parseInt(gVal) !== 1 ? `${gVal} gramas` : `${gVal} grama`;
 }
 
 const kgText = (kgVal) => {
-    return `${kgVal} KG`;
+    return `${kgVal} kg`;
 }
 
 export const getFlavorText = (entries) => {

@@ -1,4 +1,4 @@
 "use client";
-import PokeTableScreen from "../../../src/screens/PokeTableScreen/PokeTableScreen";
+import PokeTableScreen from "@/screens/PokeTableScreen/PokeTableScreen";
 
 export default PokeTableScreen;

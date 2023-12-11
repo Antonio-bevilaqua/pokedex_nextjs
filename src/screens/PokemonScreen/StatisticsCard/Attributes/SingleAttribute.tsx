@@ -1,6 +1,6 @@
 import React from 'react'
-import ProgressBar, { colorType } from '../../../../components/ProgressBar/ProgressBar';
-import { attributes } from '../../../../../assets/utils/translations';
+import ProgressBar from '@/components/ProgressBar/ProgressBar';
+import { attributes } from '@/assets/utils/translations';
 
 const SingleAttribute = ({ name, value, maxValue }) => {
     const getColor = () => {

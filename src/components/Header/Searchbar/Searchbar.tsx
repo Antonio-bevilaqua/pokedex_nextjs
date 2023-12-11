@@ -1,10 +1,10 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react'
-import { PokemonContext } from '../../../contexts/PokemonListContext';
-import "./Searchbar.css";
+import { PokemonContext } from '@/contexts/PokemonListContext';
+import "@/styles/searchbar/searchbar.css";
 import { useRouter } from 'next/navigation';
-import usePokemonFetcher from '../../../hooks/usePokemonFetcher';
+import usePokemonFetcher from '@/hooks/usePokemonFetcher';
 
 const Searchbar = ({ className = "" }: { className?: string }) => {
     const router = useRouter();
