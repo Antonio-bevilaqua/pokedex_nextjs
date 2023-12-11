@@ -21,20 +21,16 @@ const PokemonScreen = ({ params }) => {
 
     const fetchData = async () => {
         if (pokemonData !== null) return;
+
         setReady(false);
         const data = await getPokemonById(id);
         setPokemonData(data);
+        setReady(true);
         setReady(true);
     }
 
     useEffect(() => {
         fetchData();
-    }, []);
-
-    useEffect(() => {
-        if (pokemonData !== null) {
-            setReady(true);
-        }
     }, [pokemonData]);
 
     const getSprite = () => {
