@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import ThemeContext from '../src/contexts/ThemeContext';
 import imageNotFound from "../assets/images/404.png";
 import imageNotFoundDark from "../assets/images/404dark.png";
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 const Error = ({
     error,

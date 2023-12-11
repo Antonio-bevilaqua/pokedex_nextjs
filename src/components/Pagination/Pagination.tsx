@@ -3,11 +3,11 @@ import Button from '@/components/Button/Button';
 import { PokemonContext } from '@/contexts/PokemonListContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { useRouter } from 'next/navigation';
+import useRedirection from '@/hooks/useRedirection';
 import ThemeContext from '@/src/contexts/ThemeContext';
 
 const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: number, className?: string, endpoint: string }) => {
-    const router = useRouter();
+    const router = useRedirection();
     const { maxPages } = useContext(PokemonContext);
     const { theme } = useContext(ThemeContext);
 

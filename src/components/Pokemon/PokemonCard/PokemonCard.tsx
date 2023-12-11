@@ -9,7 +9,7 @@ import { padLeft, idGenerator, renderData, searchSprite } from "@/assets/utils/f
 import { backgrounds } from "@/components/Pokemon/PokeType/typeUtils";
 import PokeType from '@/components/Pokemon/PokeType/PokeType';
 import "@/styles/pokemonCard/pokemonCard.css";
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 export type Pokemon = {
     name: string,

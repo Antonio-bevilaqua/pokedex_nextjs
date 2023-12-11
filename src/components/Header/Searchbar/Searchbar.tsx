@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react'
 import { PokemonContext } from '@/contexts/PokemonListContext';
 import "@/styles/searchbar/searchbar.css";
-import { useRouter } from 'next/navigation';
+import useRedirection from '@/hooks/useRedirection';
 import usePokemonFetcher from '@/hooks/usePokemonFetcher';
 
 const Searchbar = ({ className = "" }: { className?: string }) => {
-    const router = useRouter();
+    const router = useRedirection();
     const { fullPokemonList } = useContext(PokemonContext);
     const { api_url } = usePokemonFetcher();
     const [search, setSearch] = useState("");

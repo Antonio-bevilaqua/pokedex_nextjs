@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link"
+import Link from '@/components/Link/Link';
 import imageNotFound from "@/assets/images/404.png";
 import imageNotFoundDark from "@/assets/images/404dark.png";
 import { useContext } from "react";

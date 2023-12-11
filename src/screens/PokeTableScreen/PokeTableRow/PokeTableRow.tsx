@@ -9,11 +9,9 @@ import Image from 'next/image';
 import usePokemonIntegrator from '@/hooks/usePokemonIntegrator';
 import PokeType from '@/components/Pokemon/PokeType/PokeType';
 import "@/styles/pokemonCard/pokemonCard.css";
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faNeuter, faSearch, faVenus } from '@fortawesome/free-solid-svg-icons';
-import Button from "@/components/Button/Button";
-import { useRouter } from 'next/navigation';
+import useRedirection from '@/hooks/useRedirection';
 
 export type Pokemon = {
     name: string,
@@ -26,7 +24,7 @@ type Props = {
 }
 
 const PokeTableRow = ({ pokemon, index }: Props) => {
-    const router = useRouter();
+    const router = useRedirection();
     const { integrateData } = usePokemonIntegrator();
     const [data, setData] = useState(null);
     const [loaded, setLoaded] = useState(false);

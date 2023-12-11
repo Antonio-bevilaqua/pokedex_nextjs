@@ -8,8 +8,8 @@ import Header from "@/components/Header/Header";
 import background from '@/assets/images/textura-background.png'
 import Preloader from '@/screens/Preloader/Preloader';
 import PokemonListContext from '@/contexts/PokemonListContext';
-import CacheStoringService from '@/services/cache/CacheStoringService';
 import BackToTop from '@/components/BackToTop/BackToTop';
+import { usePathname } from 'next/navigation';
 
 const pokemonSolid = localFont({
     src: '../assets/fonts/Pokemon Solid.ttf',
@@ -33,6 +33,7 @@ export default function RootLayout({
 }) {
     const [theme, setTheme] = useState(null);
     const [ready, setReady] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         let ntheme = localStorage.getItem("theme");
@@ -51,10 +52,15 @@ export default function RootLayout({
         }
     }, [theme]);
 
+    useEffect(() => {
+        setReady(true);
+    }, [pathname]);
+
     return (
         <ThemeContext.Provider value={{
             theme,
-            setTheme
+            setTheme,
+            setReady,
         }}>
             <html lang="en" className={theme === "dark" ? "dark" : ""}>
                 <body className={`${pokemonHollow.variable} ${pokemonSolid.variable} ${openSans.variable} bg-gray-200 dark:bg-gray-900`} style={{

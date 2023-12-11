@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import ThemeSwitcher from '@/components/Header/ThemeSwitcher/ThemeSwitcher';
 import Searchbar from '@/components/Header/Searchbar/Searchbar';
 import Navbar from '@/components/Header/Navbar/Navbar';

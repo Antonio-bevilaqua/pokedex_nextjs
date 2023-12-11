@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import useRedirection from '@/hooks/useRedirection';
 
 const page = () => {
-    const router = useRouter();
+    const router = useRedirection();
 
     useEffect(() => {
         localStorage.clear()
