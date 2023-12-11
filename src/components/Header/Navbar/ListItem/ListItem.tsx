@@ -60,8 +60,6 @@ const ListItem = ({ href, border, children = null, className = "", activeRoute, 
 
     return (
         <li className={`
-            pl-5
-            pr-5
             h-full
             relative
             font-bold
@@ -88,7 +86,7 @@ const ListItem = ({ href, border, children = null, className = "", activeRoute, 
             ${isActive() ? activeBg[border] : 'text-gray-700 dark:text-sky-200'}
             ${className}
         `} style={{ zIndex: 70 }}>
-            <Link href={href} className="w-full text-center">
+            <Link href={href} className="w-full h-full text-center pl-5 pr-5">
                 {children}
             </Link>
         </li>

@@ -1,27 +1,29 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import usePokemonIntegrator from '@/hooks/usePokemonIntegrator';
 import { searchSprite } from '@/assets/utils/functions';
-import Spinner from '@/components/Spinners/Spinner';
 import DamageRelations from './DamageRelations/DamageRelations';
 import StatisticsCard from './StatisticsCard/StatisticsCard';
 import EvolutionChainCard from './EvolutionChainCard/EvolutionChainCard';
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import NoSprite from "@/assets/images/NoSprite.png";
 import { useRouter } from 'next/navigation';
+import ThemeContext from '@/src/contexts/ThemeContext';
 
 const PokemonScreen = ({ params }) => {
     const router = useRouter()
     const id = params.id;
+    const { setReady } = useContext(ThemeContext);
     const [pokemon, setPokemon] = useState(null);
     const { getPokemonById } = usePokemonIntegrator();
 
     const fetchData = async () => {
+        setReady(false);
         const data = await getPokemonById(id);
         setPokemon(data);
+        setReady(true);
     }
 
     useEffect(() => {
@@ -43,11 +45,7 @@ const PokemonScreen = ({ params }) => {
 
 
     if (!pokemon) {
-        return (
-            <div className="mt-8 pt-4 flex justify-center">
-                <Spinner type="primary" size="w-20 h-20" />
-            </div>
-        )
+        return null;
     }
 
     return (

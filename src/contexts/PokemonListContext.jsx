@@ -11,7 +11,7 @@ export const PokemonContext = React.createContext({
     order: "asc",
     maxPages: null,
     setPokemonList: (val) => { },
-    loadMore: (val) => { },
+    loadMore: () => { },
     changeLimit: (val) => { },
     loadPage: (val) => { },
     sortElements: (sort, order, resetListing = false) => { },

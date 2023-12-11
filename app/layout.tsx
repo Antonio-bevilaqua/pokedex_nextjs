@@ -32,7 +32,8 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     const [theme, setTheme] = useState(null);
-    const [ready, setReady] = useState(false);
+    const [ready, setReady] = useState(true);
+    const [loaded, setLoaded] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -45,7 +46,7 @@ export default function RootLayout({
         if (theme !== null) {
             try {
                 localStorage.setItem("theme", theme);
-                setReady(true);
+                setLoaded(true);
             } catch (error) {
                 console.log(error);
             }
@@ -60,6 +61,7 @@ export default function RootLayout({
         <ThemeContext.Provider value={{
             theme,
             setTheme,
+            ready,
             setReady,
         }}>
             <html lang="en" className={theme === "dark" ? "dark" : ""}>
@@ -69,11 +71,11 @@ export default function RootLayout({
                     backgroundPosition: 'center center',
                 }}>
 
-                    <Preloader ready={ready} />
+                    <Preloader ready={ready && loaded} />
                     <PokemonListContext>
                         <Header />
 
-                        {ready && (
+                        {ready && loaded && (
                             <div className="flex w-full justify-center">
                                 <div className="w-full bg-gray-500/40 dark:bg-gray-900/40 h-full flex justify-center" >
                                     <div className="w-full lg:max-w-screen-lg sm:max-w-screen-sm bg-gray-200 dark:bg-gray-700/80 min-h-screen rounded-xl p-4 pt-48 mt-10 min-[300px]:pt-20 min-[300px]:mt-2">
