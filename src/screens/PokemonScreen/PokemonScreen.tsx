@@ -45,7 +45,7 @@ const PokemonScreen = ({ params }) => {
 
 
     if (!pokemonData) {
-        return <Preloader ready={pokemonData !== null} />;
+        return <Preloader ready={pokemonData !== null}  className="top-0 min-[300px]:top-24 left-0" />;
     }
 
     return (
