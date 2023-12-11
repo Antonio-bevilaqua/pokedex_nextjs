@@ -3,8 +3,10 @@ import { PokemonContext } from '../../contexts/PokemonListContext';
 import PokelistCard from '../../components/PokelistCard/PokelistCard';
 import PokelistSortButtons from '../PokelistScreen/PokelistSortButtons';
 import Pagination from '../../components/Pagination/Pagination';
+import PokeTableRow from './PokeTableRow/PokeTableRow';
+import Table from '../../components/Table/Table';
 
-const PokePaginatedScreen = ({ params }) => {
+const PokeTableScreen = ({ params }) => {
     const page = parseInt(params.pagina);
     const { pokemonList, limit, loadPage } = useContext(PokemonContext);
 
@@ -26,10 +28,12 @@ const PokePaginatedScreen = ({ params }) => {
         return (
             <div>
                 <PokelistSortButtons />
-                <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
-                    {initialList.map((nullable, index) => (
-                        <PokelistCard pokemon={nullable} key={`poke${index}`} index={index} />
-                    ))}
+                <div className='p-4'>
+                    <Table>
+                        {pokemonList.map((pokemon, index) => (
+                            <PokeTableRow pokemon={pokemon} key={`poke${index}`} index={index} />
+                        ))}
+                    </Table>
                 </div>
             </div>
         );
@@ -38,15 +42,17 @@ const PokePaginatedScreen = ({ params }) => {
     return (
         <div>
             <PokelistSortButtons />
-            <Pagination endpoint="/paginados/" className="w-full justify-center" actualPage={page} />
-            <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
-                {pokemonList.map((pokemon, index) => (
-                    <PokelistCard pokemon={pokemon} key={`poke${index}`} index={index} />
-                ))}
+            <Pagination endpoint="/tabela/" className="w-full justify-center mt-4" actualPage={page} />
+            <div className='p-4 w-full'>
+                <Table className="table-fixed">
+                    {pokemonList.map((pokemon, index) => (
+                        <PokeTableRow pokemon={pokemon} key={`poke${index}`} index={index} />
+                    ))}
+                </Table>
             </div>
-            <Pagination endpoint="/paginados/" className="w-full justify-center" actualPage={page} />
+            <Pagination endpoint="/tabela/" className="w-full justify-center" actualPage={page} />
         </div>
     )
 }
 
-export default PokePaginatedScreen
+export default PokeTableScreen

@@ -16,59 +16,45 @@ const ListItem = ({ href, border, children = null, className = "", exact = false
     }
 
     const borders = {
-        "red": "after:border-red-600 dark:after:border-red-300",
-        "orange": "after:border-orange-600 dark:after:border-orange-300",
-        "amber": "after:border-amber-600 dark:after:border-amber-300",
-        "yellow": "after:border-yellow-600 dark:after:border-yellow-300",
-        "lime": "after:border-lime-600 dark:after:border-lime-300",
-        "green": "after:border-green-600 dark:after:border-green-300",
-        "teal": "after:border-teal-600 dark:after:border-teal-300",
-        "cyan": "after:border-cyan-600 dark:after:border-cyan-300",
-        "sky": "after:border-sky-600 dark:after:border-sky-300",
-        "blue": "after:border-blue-600 dark:after:border-blue-300",
-        "purple": "after:border-purple-600 dark:after:border-purple-300",
+        "red": "after:border-red-600 dark:after:border-red-400",
+        "orange": "after:border-orange-600 dark:after:border-orange-400",
+        "amber": "after:border-amber-600 dark:after:border-amber-400",
+        "yellow": "after:border-yellow-600 dark:after:border-yellow-400",
+        "lime": "after:border-lime-600 dark:after:border-lime-400",
+        "green": "after:border-green-600 dark:after:border-green-400",
+        "teal": "after:border-teal-600 dark:after:border-teal-400",
+        "cyan": "after:border-cyan-600 dark:after:border-cyan-400",
+        "sky": "after:border-sky-600 dark:after:border-sky-400",
+        "blue": "after:border-blue-600 dark:after:border-blue-400",
+        "purple": "after:border-purple-600 dark:after:border-purple-400",
     }
 
     const bgs = {
-        "red": "hover:bg-red-600 hover:text-gray-200 dark:hover:bg-red-300 dark:hover:text-gray-700",
-        "orange": "hover:bg-orange-600 hover:text-gray-200 dark:hover:bg-orange-300 dark:hover:text-gray-700",
-        "amber": "hover:bg-amber-600 hover:text-gray-200 dark:hover:bg-amber-300 dark:hover:text-gray-700",
-        "yellow": "hover:bg-yellow-600 hover:text-gray-200 dark:hover:bg-yellow-300 dark:hover:text-gray-700",
-        "lime": "hover:bg-lime-600 hover:text-gray-200 dark:hover:bg-lime-300 dark:hover:text-gray-700",
-        "green": "hover:bg-green-600 hover:text-gray-200 dark:hover:bg-green-300 dark:hover:text-gray-700",
-        "teal": "hover:bg-teal-600 hover:text-gray-200 dark:hover:bg-teal-300 dark:hover:text-gray-700",
-        "cyan": "hover:bg-cyan-600 hover:text-gray-200 dark:hover:bg-cyan-300 dark:hover:text-gray-700",
-        "sky": "hover:bg-sky-600 hover:text-gray-200 dark:hover:bg-sky-300 dark:hover:text-gray-700",
-        "blue": "hover:bg-blue-600 hover:text-gray-200 dark:hover:bg-blue-300 dark:hover:text-gray-700",
-        "purple": "hover:bg-purple-600 hover:text-gray-200 dark:hover:bg-purple-300 dark:hover:text-gray-700",
+        "red": "hover:bg-red-700 hover:text-gray-200 dark:hover:bg-red-300 dark:hover:text-gray-800",
+        "orange": "hover:bg-orange-700 hover:text-gray-200 dark:hover:bg-orange-300 dark:hover:text-gray-800",
+        "amber": "hover:bg-amber-700 hover:text-gray-200 dark:hover:bg-amber-300 dark:hover:text-gray-800",
+        "yellow": "hover:bg-yellow-700 hover:text-gray-200 dark:hover:bg-yellow-300 dark:hover:text-gray-800",
+        "lime": "hover:bg-lime-700 hover:text-gray-200 dark:hover:bg-lime-300 dark:hover:text-gray-800",
+        "green": "hover:bg-green-700 hover:text-gray-200 dark:hover:bg-green-300 dark:hover:text-gray-800",
+        "teal": "hover:bg-teal-700 hover:text-gray-200 dark:hover:bg-teal-300 dark:hover:text-gray-800",
+        "cyan": "hover:bg-cyan-700 hover:text-gray-200 dark:hover:bg-cyan-300 dark:hover:text-gray-800",
+        "sky": "hover:bg-sky-700 hover:text-gray-200 dark:hover:bg-sky-300 dark:hover:text-gray-800",
+        "blue": "hover:bg-blue-700 hover:text-gray-200 dark:hover:bg-blue-300 dark:hover:text-gray-800",
+        "purple": "hover:bg-purple-700 hover:text-gray-200 dark:hover:bg-purple-300 dark:hover:text-gray-800",
     }
 
     const activeBg = {
-        "red": "bg-red-600 text-gray-200 dark:bg-red-300 dark:text-gray-700",
-        "orange": "bg-orange-600 text-gray-200 dark:bg-orange-300 dark:text-gray-700",
-        "amber": "bg-amber-600 text-gray-200 dark:bg-amber-300 dark:text-gray-700",
-        "yellow": "bg-yellow-600 text-gray-200 dark:bg-yellow-300 dark:text-gray-700",
-        "lime": "bg-lime-600 text-gray-200 dark:bg-lime-300 dark:text-gray-700",
-        "green": "bg-green-600 text-gray-200 dark:bg-green-300 dark:text-gray-700",
-        "teal": "bg-teal-600 text-gray-200 dark:bg-teal-300 dark:text-gray-700",
-        "cyan": "bg-cyan-600 text-gray-200 dark:bg-cyan-300 dark:text-gray-700",
-        "sky": "bg-sky-600 text-gray-200 dark:bg-sky-300 dark:text-gray-700",
-        "blue": "bg-blue-600 text-gray-200 dark:bg-blue-300 dark:text-gray-700",
-        "purple": "bg-purple-600 text-gray-200 dark:bg-purple-300 dark:text-gray-700",
-    }
-
-    const defaultBg = {
-        "red": "bg-red-600/5 dark:bg-red-300/5",
-        "orange": "bg-orange-600/5 dark:bg-orange-300/5",
-        "amber": "bg-amber-600/5 dark:bg-amber-300/5",
-        "yellow": "bg-yellow-600/5 dark:bg-yellow-300/5",
-        "lime": "bg-lime-600/5 dark:bg-lime-300/5",
-        "green": "bg-green-600/5 dark:bg-green-300/5",
-        "teal": "bg-teal-600/5 dark:bg-teal-300/5",
-        "cyan": "bg-cyan-600/5 dark:bg-cyan-300/5",
-        "sky": "bg-sky-600/5 dark:bg-sky-300/5",
-        "blue": "bg-blue-600/5 dark:bg-blue-300/5",
-        "purple": "bg-purple-600/5 dark:bg-purple-300/5",
+        "red": "bg-red-700 text-gray-200 dark:bg-red-300 dark:text-gray-800",
+        "orange": "bg-orange-700 text-gray-200 dark:bg-orange-300 dark:text-gray-800",
+        "amber": "bg-amber-700 text-gray-200 dark:bg-amber-300 dark:text-gray-800",
+        "yellow": "bg-yellow-700 text-gray-200 dark:bg-yellow-300 dark:text-gray-800",
+        "lime": "bg-lime-700 text-gray-200 dark:bg-lime-300 dark:text-gray-800",
+        "green": "bg-green-700 text-gray-200 dark:bg-green-300 dark:text-gray-800",
+        "teal": "bg-teal-700 text-gray-200 dark:bg-teal-300 dark:text-gray-800",
+        "cyan": "bg-cyan-700 text-gray-200 dark:bg-cyan-300 dark:text-gray-800",
+        "sky": "bg-sky-700 text-gray-200 dark:bg-sky-300 dark:text-gray-800",
+        "blue": "bg-blue-700 text-gray-200 dark:bg-blue-300 dark:text-gray-800",
+        "purple": "bg-purple-700 text-gray-200 dark:bg-purple-300 dark:text-gray-800",
     }
 
     return (
@@ -98,7 +84,7 @@ const ListItem = ({ href, border, children = null, className = "", exact = false
             after:min-[300px]:z-50
             text-sm
             sm:text-lg
-            ${isActive() ? activeBg[border] : 'text-gray-700 dark:text-gray-200'}
+            ${isActive() ? activeBg[border] : 'text-gray-700 dark:text-sky-200'}
             ${className}
         `} style={{ zIndex: 70 }}>
             <Link href={href} className="w-full text-center">

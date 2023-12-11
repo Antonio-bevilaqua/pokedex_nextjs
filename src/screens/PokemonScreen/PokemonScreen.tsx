@@ -11,8 +11,10 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import NoSprite from "../../../assets/images/NoSprite.png";
+import { useRouter } from 'next/navigation';
 
 const PokemonScreen = ({ params }) => {
+    const router = useRouter()
     const id = params.id;
     const [pokemon, setPokemon] = useState(null);
     const { getPokemonById } = usePokemonIntegrator();
@@ -35,6 +37,10 @@ const PokemonScreen = ({ params }) => {
     }
 
 
+    const goBack = () => {
+        router.back();
+    }
+
 
     if (!pokemon) {
         return (
@@ -47,9 +53,9 @@ const PokemonScreen = ({ params }) => {
     return (
         <>
             <div className='pt-4 pl-4'>
-                <Link href="/" className="text-sky-600 dark:text-sky-200 transition-opacity hover:opacity-70 text-md font-bold">
+                <a href="#" onClick={() => goBack()} className="text-sky-600 dark:text-sky-200 transition-opacity hover:opacity-70 text-md font-bold">
                     <FontAwesomeIcon icon={faArrowLeft} /> Voltar à Lista
-                </Link>
+                </a>
             </div>
             <div className="p-4 pt-2 grid gap-8 grid-cols-1 lg:grid-cols-2">
                 <div className="bg-gray-400 dark:bg-gray-600 rounded-xl flex justify-center items-center">

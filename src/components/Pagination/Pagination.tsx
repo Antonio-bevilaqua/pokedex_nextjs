@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import { useRouter, usePathname } from 'next/navigation';
 
-const Pagination = ({ actualPage, className = "" }: { actualPage: number, className?: string }) => {
+const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: number, className?: string, endpoint: string }) => {
     const router = useRouter();
     const pathname = usePathname();
     const [changing, setChanging] = useState(false);
@@ -24,7 +24,9 @@ const Pagination = ({ actualPage, className = "" }: { actualPage: number, classN
 
     const changePage = (val: number) => {
         setChanging(true);
-        router.push("/paginados/" + val);
+        endpoint = endpoint[endpoint.length - 1] !== "/" ? endpoint + "/" : endpoint;
+
+        router.push(endpoint + val);
     }
 
     useEffect(() => {
