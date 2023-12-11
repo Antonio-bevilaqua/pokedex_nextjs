@@ -91,10 +91,10 @@ const ListItem = ({ href, border, children = null, className = "", exact = false
             min-[300px]:pb-0
             w-full min-[300px]:w-auto
             after:min-[300px]:content-[' ']
-            after:min-[300px]:border-b-[5px]
+            after:min-[300px]:border-b-[4px]
             after:min-[300px]:w-full
             after:min-[300px]:absolute
-            after:min-[300px]:bottom-[-5px]
+            after:min-[300px]:bottom-[-4px]
             after:min-[300px]:z-50
             text-sm
             sm:text-lg

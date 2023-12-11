@@ -27,6 +27,7 @@ const PokelistCard = ({ pokemon, index }: Props) => {
     const { limit } = useContext(PokemonContext);
     const [data, setData] = useState(null);
     const [loaded, setLoaded] = useState(false);
+    const [rendered, setRendered] = useState(false);
 
     const getPokeData = async () => {
         const result = await integrateData(pokemon);
@@ -34,8 +35,8 @@ const PokelistCard = ({ pokemon, index }: Props) => {
     }
 
     useEffect(() => {
+        setRendered(false);
         setData(null);
-        setLoaded(false);
         if (pokemon !== null) {
             getPokeData();
         }
@@ -49,31 +50,30 @@ const PokelistCard = ({ pokemon, index }: Props) => {
         return sprite;
     }
 
-    const getDelay = () => {
-        let divider = Math.floor(index / limit);
-        let subtractor = divider * limit;
-        let actualIndex = index - subtractor;
-        return actualIndex * 30;
-    }
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setRendered((data !== null));
+        }, 300);
 
+        return () => {
+            clearTimeout(timeout);
+        }
+    }, [data]);
 
     return (
         <Link href={data !== null ? `/pokemon/${data.id}` : `#`}>
             <div className="flex justify-center hover:scale-105 cursor-pointer transition-all origin-center">
                 <div className={`flex flex-col p-4 items-center max-w-sm shadow-md shadow-gray-400 dark:shadow-none rounded-lg transition-all ease-in-out
                 ${data === null ? "bg-gray-300 dark:bg-gray-900" : backgrounds["default"]}
-            `}
-                    style={{
-                        animationDelay: `${getDelay()}ms`,
-                    }}>
+            `}>
                     <div className="relative flex justify-center items-center w-full rounded-lg bg-gray-500 dark:bg-gray-700 overflow-hidden max-w-sm">
                         <Image alt="" src={PokeballBackground} className="absolute top-0 left-0 opacity-20 w-2/3 z-0" />
-                        <img src={PokeballImage.src} className={`relative max-w-100 z-10 ${data === null || !loaded ? "pokeballSpin" : "pokeballHide"}`} />
+                        <img src={PokeballImage.src} className={`relative max-w-100 z-10 ${data === null || !loaded || !rendered ? "pokeballSpin" : "pokeballHide"}`} />
                         {data !== null && (
                             <img
                                 src={getSprite()}
                                 onLoad={() => setLoaded(true)}
-                                className={`absolute max-w-100 z-20 ${loaded ? "pokemonShow" : "opacity-0 scale-0"}`}
+                                className={`absolute max-w-100 ${loaded && rendered ? "pokemonShow z-20" : "-z-10"}`}
                             />
                         )}
                     </div>
