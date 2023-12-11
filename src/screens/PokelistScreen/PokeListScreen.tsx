@@ -34,7 +34,7 @@ const PokeListScreen = () => {
                 <PokelistSortButtons />
                 <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                     {initialList.map((nullable, index) => (
-                        <PokelistCard pokemon={nullable} key={`poke${index}`} index={index} />
+                        <PokelistCard pokemon={nullable} key={`poke_list_not_loaded_${index}`} index={index} />
                     ))}
                 </div>
             </div>
@@ -46,7 +46,7 @@ const PokeListScreen = () => {
             <PokelistSortButtons />
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {pokemonList.map((pokemon, index) => (
-                    <PokelistCard pokemon={pokemon} key={`poke${index}`} index={index} />
+                    <PokelistCard pokemon={pokemon} key={`poke_list_${pokemon.id}`} index={index} />
                 ))}
             </div>
         </div>

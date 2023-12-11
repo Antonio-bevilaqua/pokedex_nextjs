@@ -31,7 +31,7 @@ const PokeTableScreen = ({ params }) => {
                 <div className='p-4'>
                     <Table>
                         {pokemonList.map((pokemon, index) => (
-                            <PokeTableRow pokemon={pokemon} key={`poke${index}`} index={index} />
+                            <PokeTableRow pokemon={pokemon} key={`poke_not_loaded_${index}`} index={index} />
                         ))}
                     </Table>
                 </div>
@@ -46,7 +46,7 @@ const PokeTableScreen = ({ params }) => {
             <div className='p-4 w-full'>
                 <Table className="table-fixed">
                     {pokemonList.map((pokemon, index) => (
-                        <PokeTableRow pokemon={pokemon} key={`poke${index}`} index={index} />
+                        <PokeTableRow pokemon={pokemon} key={`poke${pokemon.id}`} index={index} />
                     ))}
                 </Table>
             </div>

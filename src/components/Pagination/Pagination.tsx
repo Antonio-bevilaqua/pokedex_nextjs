@@ -3,12 +3,10 @@ import DefaultButton from '../DefaultButton/DefaultButton';
 import { PokemonContext } from '../../contexts/PokemonListContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: number, className?: string, endpoint: string }) => {
     const router = useRouter();
-    const pathname = usePathname();
-    const [changing, setChanging] = useState(false);
     const { maxPages } = useContext(PokemonContext);
 
     const getPageList = () => {
@@ -23,27 +21,22 @@ const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: numb
     }
 
     const changePage = (val: number) => {
-        setChanging(true);
         endpoint = endpoint[endpoint.length - 1] !== "/" ? endpoint + "/" : endpoint;
 
         router.push(endpoint + val);
     }
 
-    useEffect(() => {
-        setChanging(false);
-    }, [pathname]);
-
     return (
         <div className={"flex flex-wrap gap-2 " + className}>
-            <DefaultButton isActive={false} onClick={() => changePage(1)} disabled={actualPage === 1 || changing}>
+            <DefaultButton isActive={false} onClick={() => changePage(1)} disabled={actualPage === 1}>
                 <FontAwesomeIcon icon={faAnglesLeft} />
             </DefaultButton>
             {getPageList().map((page) => (
-                <DefaultButton key={`page${page}`} className="pl-3 pr-3" isActive={page === actualPage} onClick={() => changePage(page)} disabled={actualPage === page || changing}>
+                <DefaultButton key={`page${page}`} className="pl-3 pr-3" isActive={page === actualPage} onClick={() => changePage(page)} disabled={actualPage === page}>
                     {page}
                 </DefaultButton>
             ))}
-            <DefaultButton isActive={false} onClick={() => changePage(maxPages)} disabled={actualPage === maxPages || changing}>
+            <DefaultButton isActive={false} onClick={() => changePage(maxPages)} disabled={actualPage === maxPages}>
                 <FontAwesomeIcon icon={faAnglesRight} />
             </DefaultButton>
         </div>

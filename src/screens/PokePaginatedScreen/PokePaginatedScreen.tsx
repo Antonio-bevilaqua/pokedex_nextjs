@@ -28,7 +28,7 @@ const PokePaginatedScreen = ({ params }) => {
                 <PokelistSortButtons />
                 <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                     {initialList.map((nullable, index) => (
-                        <PokelistCard pokemon={nullable} key={`poke${index}`} index={index} />
+                        <PokelistCard pokemon={nullable} key={`poke_paginated_not_loaded_${index}`} index={index} />
                     ))}
                 </div>
             </div>
@@ -41,7 +41,7 @@ const PokePaginatedScreen = ({ params }) => {
             <Pagination endpoint="/paginados/" className="w-full justify-center" actualPage={page} />
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>
                 {pokemonList.map((pokemon, index) => (
-                    <PokelistCard pokemon={pokemon} key={`poke${index}`} index={index} />
+                    <PokelistCard pokemon={pokemon} key={`poke_paginated_${pokemon.id}`} index={index} />
                 ))}
             </div>
             <Pagination endpoint="/paginados/" className="w-full justify-center" actualPage={page} />
