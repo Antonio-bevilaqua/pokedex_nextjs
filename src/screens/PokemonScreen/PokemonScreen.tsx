@@ -11,27 +11,24 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import NoSprite from "@/assets/images/NoSprite.png";
 import { useRouter } from 'next/navigation';
 import ThemeContext from '@/src/contexts/ThemeContext';
+import Preloader from '../Preloader/Preloader';
 
 const PokemonScreen = ({ params }) => {
     const router = useRouter()
     const id = params.id;
-    const { setReady } = useContext(ThemeContext);
     const [pokemonData, setPokemonData] = useState(null);
     const { getPokemonById } = usePokemonIntegrator();
 
     const fetchData = async () => {
         if (pokemonData !== null) return;
 
-        setReady(false);
         const data = await getPokemonById(id);
         setPokemonData(data);
-        setReady(true);
-        setReady(true);
     }
 
     useEffect(() => {
         fetchData();
-    }, [pokemonData]);
+    }, []);
 
     const getSprite = () => {
         let sprite = searchSprite(pokemonData);
@@ -48,7 +45,7 @@ const PokemonScreen = ({ params }) => {
 
 
     if (!pokemonData) {
-        return null;
+        return <Preloader ready={pokemonData !== null} />;
     }
 
     return (
