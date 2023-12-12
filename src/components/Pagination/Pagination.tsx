@@ -2,14 +2,27 @@ import React, { useContext } from 'react'
 import Button from '@/components/Button/Button';
 import { PokemonContext } from '@/contexts/PokemonListContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import useRedirection from '@/hooks/useRedirection';
 import ThemeContext from '@/src/contexts/ThemeContext';
+import useWindowSizeTracker from '@/src/hooks/useWindowSizeTracker';
 
 const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: number, className?: string, endpoint: string }) => {
     const router = useRedirection();
+    const windowSize = useWindowSizeTracker();
     const { maxPages } = useContext(PokemonContext);
     const { theme } = useContext(ThemeContext);
+
+    const getButtonSize = () => {
+        if (windowSize.width > 640) {
+            return "md";
+        }
+        if (windowSize.width > 360) {
+            return "sm";
+        }
+
+        return "xs";
+    }
 
     const getPageList = () => {
         let beginsAt = (actualPage <= 3) ? 1 : actualPage >= maxPages - 2 ? maxPages - 4 : actualPage - 2;
@@ -32,21 +45,21 @@ const Pagination = ({ endpoint, actualPage, className = "" }: { actualPage: numb
 
     return (
         <div className={"flex flex-wrap gap-2 " + className}>
-            <Button color="theme" inverted={theme === "dark"} bordered onClick={() => changePage(1)} disabled={actualPage === 1}>
+            <Button color="theme" size={getButtonSize()} inverted={theme === "dark"} bordered onClick={() => changePage(1)} disabled={actualPage === 1}>
                 <FontAwesomeIcon icon={faAnglesLeft} />
             </Button>
-            <Button color="theme" inverted={theme === "dark"} className="hidden sm:block" bordered onClick={() => changePage(actualPage - 1)} disabled={actualPage <= 1}>
+            <Button color="theme" size={getButtonSize()} inverted={theme === "dark"} className="hidden sm:block" bordered onClick={() => changePage(actualPage - 1)} disabled={actualPage <= 1}>
                 <FontAwesomeIcon icon={faAngleLeft} />
             </Button>
             {getPageList().map((page) => (
-                <Button color="theme" key={`page${page}`} inverted={theme === "dark" && page === actualPage} bordered transparentBg={page !== actualPage} onClick={() => changePage(page)}>
+                <Button color={page === actualPage ? "default" : "theme"} size={getButtonSize()} key={`page${page}`} bordered transparentBg={page !== actualPage} onClick={() => changePage(page)}>
                     {page}
                 </Button>
             ))}
-            <Button color="theme" inverted={theme === "dark"} bordered className="hidden sm:block" onClick={() => changePage(actualPage + 1)} disabled={actualPage === maxPages}>
+            <Button color="theme" size={getButtonSize()} inverted={theme === "dark"} bordered className="hidden sm:block" onClick={() => changePage(actualPage + 1)} disabled={actualPage === maxPages}>
                 <FontAwesomeIcon icon={faAngleRight} />
             </Button>
-            <Button color="theme" inverted={theme === "dark"} bordered onClick={() => changePage(maxPages)} disabled={actualPage === maxPages}>
+            <Button color="theme" size={getButtonSize()} inverted={theme === "dark"} bordered onClick={() => changePage(maxPages)} disabled={actualPage === maxPages}>
                 <FontAwesomeIcon icon={faAnglesRight} />
             </Button>
         </div>

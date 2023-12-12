@@ -1,7 +1,7 @@
 
 
 export const backgrounds = {
-    "default": "bg-gray-600 dark:bg-gray-500",
+    "default": "bg-gray-600 dark:bg-sky-200",
     "primary": "bg-sky-800 dark:bg-sky-500",
     "secondary": "bg-purple-600 dark:bg-purple-500",
     "warning": "bg-orange-600 dark:bg-orange-500",
@@ -23,7 +23,7 @@ export const inverted_backgrounds = {
 };
 
 export const borders = {
-    "default": "border-2 border-solid border-gray-600 dark:border-gray-500",
+    "default": "border-2 border-solid border-gray-600 dark:border-sky-200",
     "primary": "border-2 border-solid border-sky-800 dark:border-sky-500",
     "secondary": "border-2 border-solid border-purple-600 dark:border-purple-500",
     "warning": "border-2 border-solid border-orange-600 dark:border-orange-500",
@@ -45,7 +45,7 @@ export const inverted_borders = {
 };
 
 export const texts = {
-    "default": "text-gray-100 dark:text-white",
+    "default": "text-gray-100 dark:text-gray-800",
     "primary": "text-sky-100 dark:text-white",
     "secondary": "text-purple-100 dark:text-white",
     "warning": "text-orange-100 dark:text-white",
@@ -67,9 +67,9 @@ export const inverted_texts = {
 };
 
 export const sizes = {
-    "xs": "p-1",
-    "sm": "p-2",
+    "xs": "pt-0 pb-0 pl-1 pr-1",
+    "sm": "pt-1 pb-1 pl-2 pr-2",
     "md": "pt-2 pb-2 pl-3 pr-3",
-    "lg": "pt-2 pb-2 pl-4 pr-4",
-    "xl": "pt-2 pb-2 pl-5 pr-5",
+    "lg": "pt-3 pb-3 pl-4 pr-4",
+    "xl": "pt-4 pb-4 pl-5 pr-5",
 };
