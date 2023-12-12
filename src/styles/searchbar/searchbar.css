@@ -1,14 +1,17 @@
 .searchbar::-webkit-scrollbar {
     border-bottom-right-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
 
 }
 
 .searchbar::-webkit-scrollbar-track {
     border-bottom-right-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
 }
 
 .dark .searchbar::-webkit-scrollbar-track {
     border-bottom-right-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
 }
 
 .searchbar {
