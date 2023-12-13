@@ -11,6 +11,7 @@ import PokemonListContext from '@/contexts/PokemonListContext';
 import BackToTop from '@/components/BackToTop/BackToTop';
 import { usePathname } from 'next/navigation';
 import favicon from "@/assets/pokemon_fav.png";
+import useScrollTracker from '@/src/hooks/useScrollTracker';
 
 const pokemonSolid = localFont({
     src: '../assets/fonts/Pokemon Solid.ttf',
@@ -36,6 +37,7 @@ export default function RootLayout({
     const [ready, setReady] = useState(true);
     const [loaded, setLoaded] = useState(false);
     const pathname = usePathname();
+    const { scrollPosition } = useScrollTracker();
 
     useEffect(() => {
         let ntheme = localStorage.getItem("theme");
@@ -51,6 +53,7 @@ export default function RootLayout({
 
     useEffect(() => {
         if (!ready) setReady(true);
+        if (scrollPosition > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [pathname]);
 
     return (
